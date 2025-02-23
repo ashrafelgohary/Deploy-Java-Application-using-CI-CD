@@ -1,0 +1,27 @@
+---
+- name: Deploy Docker Image
+  hosts: localhost
+  connection: local
+  vars:
+    image_tag: "{{ image_tag }}"
+  tasks:
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: "ashrafelgohary00/myapp"
+        tag: "{{ image_tag }}"
+        source: pull
+        state: present
+
+    - name: Stop and remove existing container
+      community.docker.docker_container:
+        name: "myapp"
+        state: absent
+
+    - name: Run Docker container
+      community.docker.docker_container:
+        name: "myapp"
+        image: "ashrafelgohary00/myapp:{{ image_tag }}"
+        ports:
+          - "5000:8080"
+        state: started
+
