@@ -5,7 +5,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 
 RUN cp -R /usr/local/tomcat/webapps.dist/*	/usr/local/tomcat/webapps
 # Copy WAR files to deploy the application
-COPY ./webapp/target/*.war /usr/local/tomcat/webapps/
+COPY webapp/target/*.war /usr/local/tomcat/webapps/
 
 # Set proper permissions (if required)
 # Create tomcat user and group
