@@ -7,7 +7,7 @@
   tasks:
     - name: Update Kubernetes manifest with the new image tag
       replace:
-        path: Kubernetes/deployment.yml
+        path: ../Kubernetes/deployment.yml
         regexp: 'IMAGE_TAG'
         replace: "{{ image_tag }}"
 
