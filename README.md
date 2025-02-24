@@ -1,7 +1,11 @@
 # CI/CD Pipeline for Java Application Deployment to AWS EKS
 
 This repository contains the code and configuration files for a CI/CD pipeline that builds Docker images, pushes them to Docker Hub, and deploys them to an AWS EKS cluster using Jenkins and Ansible.
+## Pipeline
+![Pipeline](assests/pipline.png)
 
+## Application on EKS
+![Deployed App](assests/application.png)
 ## Overview
 
 The pipeline automates the following steps:
@@ -71,6 +75,7 @@ Update kubeconfig to use EKS cluster
 ```bash
 aws eks update-kubeconfig --name eks-cluster --region us-east-1
 ```
+![EKS Cluster](assests/ekscluster.png)
 
 ### 3. Configure Kubernetes Manifests
 Update the Kubernetes manifests (`deployment.yml.j2` and `service.yml`) in the `kubernetes/` directory to match your application configuration.
