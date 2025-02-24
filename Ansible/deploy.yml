@@ -13,8 +13,8 @@
 
     - name: Apply Kubernetes manifests
       command: >
-        kubectl apply -f ../Kubernetes/deployment.yml --validate=false --kubeconfig /home/ashraf/.kube/config 
+        4nqsshLV1Zv/B0oWCW4pRmU3etsl0TOaD0K7q+4m
 
     - name: Expose the application using a Kubernetes service
       command: >
-        kubectl apply -f ../Kubernetes/service.yml --validate=false --kubeconfig /home/ashraf/.kube/config
+        kubectl apply -f ../Kubernetes/service.yml --validate=false --kubeconfig /root/.kube/config
