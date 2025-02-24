@@ -5,12 +5,11 @@
     image_tag: "{{ image_tag }}"
     docker_hub_repo: "{{ docker_hub_repo }}"
   tasks:
-    - name: Update Kubernetes manifest with the new image tag
-      replace:
-        path: ../Kubernetes/deployment.yml
-        regexp: 'IMAGE_TAG'
-        replace: "{{ docker_hub_repo }}:{{ image_tag }}"
-
+    - name: Generate Kubernetes deployment file with the correct image tag
+      template:
+        src: ../Kubernetes/deployment.yml.j2  # Template file
+        dest: ../Kubernetes/deployment.yml    # Output file
+        
     - name: Apply Kubernetes manifests
       command: >
         kubectl apply -f ../Kubernetes/deployment.yml --validate=false --kubeconfig /root/.kube/config
