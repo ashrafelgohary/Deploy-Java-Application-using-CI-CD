@@ -13,8 +13,8 @@
 
     - name: Apply Kubernetes manifests
       command: >
-        kubectl apply -f Kubernetes/deployment.yaml --kubeconfig ~/.kube/config
+        kubectl apply -f Kubernetes/deployment.yml --kubeconfig ~/.kube/config
 
     - name: Expose the application using a Kubernetes service
       command: >
-        kubectl apply -f Kubernetes/service.yaml --kubeconfig ~/.kube/config
+        kubectl apply -f Kubernetes/service.yml --kubeconfig ~/.kube/config
