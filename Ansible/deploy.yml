@@ -1,27 +1,20 @@
 ---
-- name: Deploy Docker Image
+- name: Deploy Docker Image to EKS
   hosts: localhost
-  connection: local
   vars:
     image_tag: "{{ image_tag }}"
+    docker_hub_repo: "{{ docker_hub_repo }}"
   tasks:
-    - name: Pull Docker image
-      community.docker.docker_image:
-        name: "ashrafelgohary00/myapp"
-        tag: "{{ image_tag }}"
-        source: pull
-        state: present
+    - name: Update Kubernetes manifest with the new image tag
+      replace:
+        path: kubernetes/deployment.yaml
+        regexp: '{{IMAGE_TAG}}'
+        replace: "{{ image_tag }}"
 
-    - name: Stop and remove existing container
-      community.docker.docker_container:
-        name: "myapp"
-        state: absent
+    - name: Apply Kubernetes manifests
+      command: >
+        kubectl apply -f Kubernetes/deployment.yaml --kubeconfig ~/.kube/config
 
-    - name: Run Docker container
-      community.docker.docker_container:
-        name: "myapp"
-        image: "ashrafelgohary00/myapp:{{ image_tag }}"
-        ports:
-          - "5000:8080"
-        state: started
-
+    - name: Expose the application using a Kubernetes service
+      command: >
+        kubectl apply -f Kubernetes/service.yaml --kubeconfig ~/.kube/config
